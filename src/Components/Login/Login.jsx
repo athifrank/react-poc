@@ -1,20 +1,39 @@
 import React from 'react'
-import {Redirect,withRouter} from 'react-router-dom'
-import  "../Login/Login.css";
-const Login=({history})=>{
-    const formSubmit=(e)=>{
+import { withRouter } from 'react-router-dom'
+import { Form,Button,Row,Col,Container } from 'react-bootstrap'
+import "../Login/Login.css";
+const Login = ({ history }) => {
+    const formSubmit = (e) => {
         e.preventDefault();
-        //return <Redirect to="/process" />
         history.push('/process')
 
     }
-    return(
+    return (
         <div>
-            <form onSubmit={formSubmit}>
-                <div>User Name : <input type='text'/> </div>
-                <div>password  : <input type='password'/></div>
-                <div><input type='submit'/></div>
-            </form>
+        <Container>
+            <Form onSubmit={formSubmit} autoComplete="off">
+                <Form.Group as={Row} controlId="formPlaintextEmail">
+                    <Form.Label column sm="2">
+                        Email
+               </Form.Label>
+                    <Col sm="4">
+                        <Form.Control type="text" placeholder="email" />
+                    </Col>
+                </Form.Group>
+
+                <Form.Group as={Row} controlId="formPlaintextPassword">
+                    <Form.Label column sm="2">
+                        Password
+                </Form.Label>
+                    <Col sm="4">
+                        <Form.Control type="password" placeholder="Password" />
+                    </Col>
+                </Form.Group>
+                <Button variant="primary" type="submit">
+                    Submit
+                </Button>
+            </Form>
+        </Container>
         </div>
     )
 }
