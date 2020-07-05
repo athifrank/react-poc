@@ -1,11 +1,16 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
+import {connect} from 'react-redux'
 import { Form,Button,Row,Col,Container } from 'react-bootstrap'
 import "../Login/Login.css";
-const Login = ({ history }) => {
+import * as actions from '../../actions'
+
+const Login = ({ history,name,getData }) => {
+    console.log('data ',name)
     const formSubmit = (e) => {
         e.preventDefault();
-        history.push('/process')
+        //history.push('/process')
+        getData()
 
     }
     return (
@@ -38,4 +43,16 @@ const Login = ({ history }) => {
     )
 }
 
-export default withRouter(Login);
+const mapStateToProps=(state)=>{
+    return{
+        name:state.user
+    }
+}
+
+const mapDispatchToProps=(dispatch)=>{
+    return{
+        getData:()=>dispatch(actions.Login())
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(withRouter(Login));
